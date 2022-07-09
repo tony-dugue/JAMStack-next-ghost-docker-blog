@@ -1,8 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.scss'
 
-const Home: NextPage = () => {
+import { getAllPosts } from '../lib/ghost';
+
+type Post = { title: string, slug: string, uuid: string }
+
+export const getStaticProps = async () => {
+  const posts = await getAllPosts();
+  return { props: { posts } };
+}
+
+const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,8 +23,19 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+
         <h1 className={styles.title}>Mon blog</h1>
-        <p className={styles.description}>Ma description</p>
+
+        <ul>
+          {posts.map((post) => (
+            <li key={post.uuid}>
+              <Link href={`/post/${post.slug}`}>
+                <a>{post.title}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
       </main>
     </div>
   )
