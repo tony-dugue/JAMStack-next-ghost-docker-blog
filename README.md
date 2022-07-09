@@ -16,17 +16,43 @@ Projet [Next.js](https://nextjs.org/) crée avec [`create-next-app`](https://git
 $ https://github.com/tony-dugue/JAMStack-next-ghost-docker-blog.git
 ```
 
-- installer les packages :
+- installer les dépendances du projet :
 ```bash
 $ yarn install
 # ou
 $ npm install
 ```
 
+- installer Ghost en local avec Docker
+
+démarrer l'application Docker Desktop sur le mac
+
+installer les images dans Docker :
+
+```bash
+$ docker compose up
+```
+
+Si une erreur de ce type se produit, aller dans Préferences / Ressources / File Sharing et faire + pour ajouter manuellement le dossier database se trouvant dans le projet  
+
+```bash
+Error response from daemon: Mounts denied: 
+The path /Applications/MAMP/xxx/next-ghost-docker-blog/database is not shared from the host and is not known to Docker.
+You can configure shared paths from Docker -> Preferences... -> Resources -> File Sharing.
+See https://docs.docker.com/desktop/mac for more info.
+```
+
 ## Démarrer l'application
 ***
 
+- Démarrer le serveur de Ghost via Docker Desktop (ou avec un docker compose up dans le terminal) et dans le terminal, accéder à l'admin de Ghost : [http://localhost:3001/ghost](http://localhost:3001/ghost)
+
+`email: john@doe.com et password : johndoe666`
+
+si le projet Ghost a été réinitialisé, remplacer le dossier database par celui du dépôt Github du projet (contenant la bdd à jour)
+
 - Démarrer le serveur de développement :
+
 ```bash
 $ npm run dev
 # ou

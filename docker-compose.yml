@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ghost:
+    image: ghost:5.2.4-alpine
+    restart: always
+    ports:
+      - "3001:2368"
+    environment:
+      url: http://localhost:3001
+    volumes:
+      - $PWD/database:/var/lib/ghost/content
