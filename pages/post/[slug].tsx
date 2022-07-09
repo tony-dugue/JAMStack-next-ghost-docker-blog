@@ -13,7 +13,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPostBySlug(params?.slug);
-  return { props: { post } };
+  return {
+    props: { post },
+    revalidate: 10 // at most 1 request to the Ghost CMS in the backend
+  };
 }
 
 type Post = { title: string, html: string, slug: string }

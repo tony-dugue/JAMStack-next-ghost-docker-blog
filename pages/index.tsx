@@ -9,7 +9,10 @@ type Post = { title: string, slug: string, uuid: string }
 
 export const getStaticProps = async () => {
   const posts = await getAllPosts();
-  return { props: { posts } };
+  return {
+    props: { posts },
+    revalidate: 10 // in seconds
+  };
 }
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
